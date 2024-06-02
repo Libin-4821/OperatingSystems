@@ -1,13 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h> //enables standard io functions like printf,scanf
+#include <stdlib.h> //enables functions like exit
 
-void matrix_get(int[5][5], int, int);
+void matrix_get(int[5][5], int, int); //declaration of function
 
 int main() {
-    int max[5][5], all[5][5];
-    int total[5];
-    int avail[5], f[5], need[5][5], state[5];
-    int s, i, j, p, r, c, ch, ch1, k = 0;
+    int max[5][5], all[5][5]; //maximum resources matrix and allocated resources matrix
+    int total[5]; //array to represent total resource present in each type
+    int avail[5], f[5], need[5][5], state[5]; // avail,need 
+    int s, i, j, p, r, c, ch, ch1, k = 0; // p - no of process r - no of resource type 
 
     printf("\t\t DEADLOCK - BANKER'S ALGORITHM \n");
     printf("ENTER THE NUMBER OF PROCESS:");
@@ -22,7 +22,7 @@ int main() {
     printf("ENTER THE TOTAL RESOURCES PRESENT:\n");
 
     for (i = 0; i < r; i++) {
-        printf("Resource %d: ", i + 1);
+        printf("Resource %d: ", i + 1); // to get total resource in each type
         scanf("%d", &total[i]);
     }
 
@@ -33,31 +33,31 @@ int main() {
                 printf("\nINPUT IS > TOTAL RESOURCE PRESENT\n");
                 exit(0);
             }
-            s = s - all[j][i];
+            s = s - all[j][i];        //calculate available matrix
         }
         avail[i] = s;
     }
 
     printf("\n\n AVAILABLE MATRIX \n\n");
     for (i = 0; i < r; i++) {
-        printf("%d\t", avail[i]);
+        printf("%d\t", avail[i]); //display available matrix
     }
 
     printf("\n\n NEED MATRIX:\n\n");
     for (i = 0; i < p; i++) {
         f[i] = 0;
         for (j = 0; j < r; j++) {
-            need[i][j] = max[i][j] - all[i][j];
+            need[i][j] = max[i][j] - all[i][j]; //calculate need matrix
             if (need[i][j] < 0) {
                 need[i][j] = 0;
             }
-            printf("%d\t", need[i][j]);
+            printf("%d\t", need[i][j]); //display need matrix
         }
         printf("\n");
     }
 
     while (ch > 0) {
-        ch1 = ch;
+        ch1 = ch; 
         for (i = 0; i < p; i++) {
             if (f[i] == 0) {
                 c = 0;
